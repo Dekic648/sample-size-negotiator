@@ -140,7 +140,7 @@ function render(){
 
   if(type==='formative'){
     const myth = p===0.31
-      ? '<strong>The "p = 0.31" default</strong> — Nielsen\'s famous 5-user rule assumes every problem occurs in 31% of users. Your actual p may differ. Use problem logs from previous studies if available.'
+      ? '<strong>The "p = 0.31" default</strong> — The famous 5-user rule assumes every problem occurs in 31% of users. Your actual p may differ. Use problem logs from previous studies if available.'
       : p < 0.15
       ? '<strong>Low p detected.</strong> Rare problems require more participants. With p = '+p.toFixed(2)+', even n = '+recN+' may miss low-frequency issues. Consider iterative rounds.'
       : '<strong>High p detected.</strong> Common problems are found quickly. With p = '+p.toFixed(2)+', even a small study gives good coverage.';
@@ -150,7 +150,7 @@ function render(){
   }
 
   const script = type==='formative'
-    ? `With ${recN} participants and an expected problem occurrence rate of ${(p*100).toFixed(0)}%, this study will surface approximately ${(target*100).toFixed(0)}% of the discoverable usability problems — the standard threshold recommended by Sauro & Lewis. Each additional participant beyond ${recN} adds only ${marginal!=null?(marginal).toFixed(1):'~'+((1-target)*100/2).toFixed(1)}% more coverage, meaning diminishing returns set in at this point. Running fewer — say ${recN>2?recN-2:recN} participants — would give ${m2!=null?m2.toFixed(1)+'%':'less'} coverage, meaningfully below the ${(target*100).toFixed(0)}% standard.`
+    ? `With ${recN} participants and an expected problem occurrence rate of ${(p*100).toFixed(0)}%, this study will surface approximately ${(target*100).toFixed(0)}% of the discoverable usability problems — the standard threshold for formative research. Each additional participant beyond ${recN} adds only ${marginal!=null?(marginal).toFixed(1):'~'+((1-target)*100/2).toFixed(1)}% more coverage, meaning diminishing returns set in at this point. Running fewer — say ${recN>2?recN-2:recN} participants — would give ${m2!=null?m2.toFixed(1)+'%':'less'} coverage, meaningfully below the ${(target*100).toFixed(0)}% standard.`
     : `With ${recN} participants, this summative study will produce completion rate estimates with a ±10 percentage point margin of error at 95% confidence — the accepted standard for benchmark comparisons. Reducing the sample significantly (e.g., below 50) would widen the confidence interval to ±14pp or more, making it harder to detect real differences between designs or against benchmarks.`;
 
   document.getElementById('stakeholder-text').textContent = script;
